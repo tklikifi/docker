@@ -1,0 +1,21 @@
+version: '2'
+services:
+  frontend:
+    build: frontend
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./frontend:/code
+    depends_on:
+      - redis
+      - backend
+  backend:
+    build: backend
+    volumes:
+      - ./backend:/code
+    depends_on:
+      - redis
+  redis:
+    image: redis
+    volumes:
+      - ./data/redis:/data
